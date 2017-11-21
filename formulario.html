@@ -1,0 +1,450 @@
+<!DOCTYPE HTML>
+<html lang="pt-Br">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<head>
+  <title>Fundamentos de Programação Front-End</title>
+
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript">
+      $(document).ready(function () {
+          $("#content div:nth-child(1)").show();
+          $(".abas li:first div").addClass("selected");
+          $(".aba").click(function () {
+              $(".aba").removeClass("selected");
+              $(this).addClass("selected");
+              var indice = $(this).parent().index();
+              indice++;
+              $("#content div").hide();
+              $("#content div:nth-child(" + indice + ")").show();
+          });
+
+          $(".aba").hover(
+              function () { $(this).addClass("ativa") },
+              function () { $(this).removeClass("ativa") }
+          );
+      });
+  </script>
+  <script type="text/javascript">
+      function AssignValues() {
+          localStorage.setItem("text1", document.form1.text1.value);
+          localStorage.setItem("text2", document.form1.text2.value);
+          localStorage.setItem("text3", document.form1.text3.value);
+      }
+
+      function Value1() {
+          alert("Value 1 is " + localStorage.getItem("text1"));
+      }
+
+      function Value2() {
+          alert("Value 2 is " + localStorage.getItem("text2"));
+      }
+
+      function Value3() {
+          alert("Value 3 is " + localStorage.getItem("text3"));
+      }
+
+      function ShowLength() {
+          alert("No of items in local storage is " + localStorage.length);
+      }
+      function ClearStorage() {
+          localStorage.clear();
+          alert("No of items in local storage is " + localStorage.length);
+      }
+  </script>
+
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Titillium+Web);
+
+    *,
+    *:after,
+    *:before {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Titillium Web', sans-serif;
+      line-height: 1.5;
+      color: #444;
+      font-size: 16px;
+    }
+
+    p {
+      padding: 0 10px;
+    }
+
+    .tabs-container {
+      position: relative;
+      height: 360px;
+      max-width: 98%;
+      margin: 0 auto;
+    }
+
+    .tabs-container p {
+      margin: 0;
+      padding: 0;
+    }
+
+    .tabs-container:after {
+      content: '.';
+      display: block;
+      clear: both;
+      height: 0;
+      font-size: 0;
+      line-height: 0;
+      visibility: none;
+    }
+
+    input.tabs {
+      display: none;
+    }
+
+    input.tabs+label {
+      line-height: 40px;
+      padding: 0 20px;
+      float: left;
+
+      background: #444;
+      color: #fff;
+      cursor: pointer;
+      transition: background ease-in-out .3s;
+    }
+
+    input.tabs:checked+label {
+      color: #000;
+      background: #eee;
+    }
+
+    input.tabs+label+div {
+      width: 98%;
+      opacity: 0;
+      position: absolute;
+      background: #eee;
+      top: 40px;
+      left: 0;
+      height: 800px;
+      padding: 10px;
+      z-index: -1;
+      transition: opacity ease-in-out .3s;
+    }
+
+    input.tabs:checked+label+div {
+      opacity: 1;
+      z-index: 1000;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="tabs-container">
+
+    <input type="radio" name="tabs" class="tabs" id="tab1" checked>
+    <label for="tab1">Identificador do Indivíduo</label>
+    <div>
+      <h3>Dados Obrigatórios</h3>
+
+      <label>Designação do identificador do indivíduo:</label>
+      <input type="text" class="dadosObrigatorio" name="designacaoID">
+      <br/>
+      <label>Área geográfica do identificador do indivíduo:</label>
+      <input type="text" class="dadosObrigatorio" name="areaGeograficaID">
+      <br/>
+      <label>Emissor do identificador do indivíduo:</label>
+      <input type="text" class="dadosObrigatorio" name="emissorID">
+      <br/>
+      <label>Data da emissão do identificador do indivíduo:</label>
+      <input type="text" class="dadosObrigatorio" name="dataEmissaoID" />
+      <br/>
+      <label>Tipo do identificador do indivíduo:</label>
+      <input type="text" class="dadosObrigatorio" name="tipoID">
+
+      <h3>Dados opcionais</h3>
+
+      <h4>Certidão de nascimento, casamento ou divórcio</h4>
+      <label>Nome do cartório:</label>
+      <input type="text" class="dadosObrigatorio" name="nomeCartorio">
+      <br/>
+      <label>Livro:</label>
+      <input type="text" class="dadosObrigatorio" name="livroCartorio">
+      <br/>
+      <label>Folha:</label>
+      <input type="text" class="dadosObrigatorio" name="folhaCartorio">
+      <br/>
+      <label>Termo:</label>
+      <input type="text" class="dadosObrigatorio" name="termoCartorio">
+
+      <h4>Carteira de Trabalho e Previdência Social (CTPS)</h4>
+
+      <label>Número da Série:</label>
+      <input type="text" class="dadosObrigatorio" name="numeroSerieCTPS">
+      <br/>
+      <label>Título de eleitor:</label>
+      <input type="text" class="dadosObrigatorio" name="tituloEleitor">
+      <br/>
+      <label>Seção eleitoral:</label>
+      <input type="text" class="dadosObrigatorio" name="tituloEleitoral">
+      <br/>
+      <label>Zona:</label>
+      <input type="text" class="dadosObrigatorio" name="zonaEleitoral">
+      <br/>
+      <label>Estado</label>
+      <select name="estado">
+        <option selected=" " value=" ">Selecione o Estado (UF)</option>
+        <option value="Acre ">Acre</option>
+        <option value="Alagoas ">Alagoas</option>
+        <option value="Amapá ">Amapá</option>
+        <option value="Amazonas ">Amazonas</option>
+        <option value="Bahia ">Bahia</option>
+        <option value="Ceará ">Ceará</option>
+        <option value="Distrito Federal ">Distrito Federal</option>
+        <option value="Espírito Santo ">Espírito Santo</option>
+        <option value="Goiás ">Goiás</option>
+        <option value="Maranhão ">Maranhão</option>
+        <option value="Mato Grosso ">Mato Grosso</option>
+        <option value="Mato Grosso do Sul ">Mato Grosso do Sul</option>
+        <option value="Minas Gerais ">Minas Gerais</option>
+        <option value="Pará ">Pará</option>
+        <option value="Paraíba ">Paraíba</option>
+        <option value="Paraná ">Paraná</option>
+        <option value="Pernambuco ">Pernambuco</option>
+        <option value="Piauí ">Piauí</option>
+        <option value="Rio de Janeiro ">Rio de Janeiro</option>
+        <option value="Rio Grande do Sul ">Rio Grande do Sul</option>
+        <option value="Rio Grande do Norte ">Rio Grande do Norte</option>
+        <option value="Rondônia ">Rondônia</option>
+        <option value="Roraima ">Roraima</option>
+        <option value="Santa Catarina ">Santa Catarina</option>
+        <option value="São Paulo ">São Paulo</option>
+        <option value="Sergipe ">Sergipe</option>
+        <option value="Tocantins ">Tocantins</option>
+      </select>
+    </div>
+
+
+    <input type="radio" name="tabs" class="tabs" id="tab2">
+    <label for="tab2">Nome do Indivíduo</label>
+    <div>
+      <h3>Compontes de um nome</h3>
+      <label>Título:</label>
+      <input type="text" class="nomeIndividuo" name="titulo">
+      <br/>
+      <label>Nome:</label>
+      <input type="text" class="nomeIndividuo" name="nome">
+      <br/>
+      <label>Sobrenome:</label>
+      <input type="text" class="nomeIndividuo" name="sobrenome">
+      <br/>
+      <label>Sufixo:</label>
+      <input type="text" class="nomeIndividuo" name="sufixo">
+    </div>
+
+
+
+    <input type="radio" name="tabs" class="tabs" id="tab3">
+    <label for="tab3">Dados Demográficos</label>
+    <div>
+      <label for="data">Nascimento</label>
+      <input type="date" id="dataNascimento" name="dataNascimento" class="dadosDemograficos" />
+      <br/>
+      <label>Óbito:</label>
+      <input class="dadosDemograficos" name="obito">
+      <br/>
+      <label for="data">Data do Óbito</label>
+      <input type="date" id="dataObito" name="dataObito" class="dadosDemograficos" />
+      <br/>
+      <label>Fonte de notificacao do óbito:</label>
+      <input class="dadosDemograficos" name="notificacaoObito">
+      <br/>
+      <label>Sexo:</label>
+      <input type="text" class="dadosDemograficos" name="sexo ">
+      <br/>
+      <label>Nome da mãe:</label>
+      <input type="text" class="dadosDemograficos" name="nomeMae">
+      <br/>
+      <label>Nome do pai:</label>
+      <input type="text" class="dadosDemograficos" name="nomePai">
+      <br/>
+      <label>Situação familiar:</label>
+      <input type="text" class="dadosDemograficos" name="situacaoFamiliar">
+      <br/>
+      <label>Raça/cor:</label>
+      <input type="text" class="dadosDemograficos" name="raca">
+      <br/>
+      <label>Nacionalidade:</label>
+      <input type="text" class="dadosDemograficos" name="nacionalidade">
+      <br/>
+      <label>Municipio de nascimento:</label>
+      <input type="text" class="dadosDemograficos" name="municipioNascimento">
+      <br/>
+      <label for="estadoNascimento">Estado de nascimento:</label>
+      <select name="estado " id="estadoNascimento">
+        <option selected=" " value=" ">Selecione o Estado (UF)</option>
+        <option value="Acre ">Acre</option>
+        <option value="Alagoas ">Alagoas</option>
+        <option value="Amapá ">Amapá</option>
+        <option value="Amazonas ">Amazonas</option>
+        <option value="Bahia ">Bahia</option>
+        <option value="Ceará ">Ceará</option>
+        <option value="Distrito Federal ">Distrito Federal</option>
+        <option value="Espírito Santo ">Espírito Santo</option>
+        <option value="Goiás ">Goiás</option>
+        <option value="Maranhão ">Maranhão</option>
+        <option value="Mato Grosso ">Mato Grosso</option>
+        <option value="Mato Grosso do Sul ">Mato Grosso do Sul</option>
+        <option value="Minas Gerais ">Minas Gerais</option>
+        <option value="Pará ">Pará</option>
+        <option value="Paraíba ">Paraíba</option>
+        <option value="Paraná ">Paraná</option>
+        <option value="Pernambuco ">Pernambuco</option>
+        <option value="Piauí ">Piauí</option>
+        <option value="Rio de Janeiro ">Rio de Janeiro</option>
+        <option value="Rio Grande do Sul ">Rio Grande do Sul</option>
+        <option value="Rio Grande do Norte ">Rio Grande do Norte</option>
+        <option value="Rondônia ">Rondônia</option>
+        <option value="Roraima ">Roraima</option>
+        <option value="Santa Catarina ">Santa Catarina</option>
+        <option value="São Paulo ">São Paulo</option>
+        <option value="Sergipe ">Sergipe</option>
+        <option value="Tocantins ">Tocantins</option>
+      </select>
+      <br/>
+      <label>País de nascimento:</label>
+      <input type="text" class="dadosDemograficos" name="paisNascimento ">
+      <br/>
+      <label for="data">Data entrada país</label>
+      <input type="date" class="dadosDemograficos" name="dataEntradaPais" />
+      <br/>
+      <label>Pluralidade do nascimento:</label>
+      <input type="text" class="dadosDemograficos" name="pluralidade">
+      <br/>
+      <label>Ordem de nascimento:</label>
+      <input type="text" class="dadosDemograficos" name="ordemNascimento">
+      <br/>
+      <label>Comentários da identificação:</label>
+      <input type="text" class="dadosDemograficos" name="comentariosIdentificacao">
+    </div>
+
+    <input type="radio" name="tabs" class="tabs" id="tab4">
+    <label for="tab4">
+      Endereço do indivíduo
+    </label>
+    <div>
+      <label>Endereço:</label>
+      <input type="text" class="enderecoIndividuo" name="endereco">
+      <br/>
+      <label>Bairro:</label>
+      <input type="text" class="enderecoIndividuo" name="bairro ">
+      <br/>
+      <label>Municipio:</label>
+      <input type="text" class="enderecoIndividuo" name="municipio">
+      <br/>
+      <label>Código do municipio:</label>
+      <input type="text" class="enderecoIndividuo" name="codMunicipio">
+      <br/>
+      <label>Estado:</label>
+      <select name="estado " id="estadoIndividuo">
+        <option selected=" " value=" ">Selecione o Estado (UF)</option>
+        <option value="Acre ">Acre</option>
+        <option value="Alagoas ">Alagoas</option>
+        <option value="Amapá ">Amapá</option>
+        <option value="Amazonas ">Amazonas</option>
+        <option value="Bahia ">Bahia</option>
+        <option value="Ceará ">Ceará</option>
+        <option value="Distrito Federal ">Distrito Federal</option>
+        <option value="Espírito Santo ">Espírito Santo</option>
+        <option value="Goiás ">Goiás</option>
+        <option value="Maranhão ">Maranhão</option>
+        <option value="Mato Grosso ">Mato Grosso</option>
+        <option value="Mato Grosso do Sul ">Mato Grosso do Sul</option>
+        <option value="Minas Gerais ">Minas Gerais</option>
+        <option value="Pará ">Pará</option>
+        <option value="Paraíba ">Paraíba</option>
+        <option value="Paraná ">Paraná</option>
+        <option value="Pernambuco ">Pernambuco</option>
+        <option value="Piauí ">Piauí</option>
+        <option value="Rio de Janeiro ">Rio de Janeiro</option>
+        <option value="Rio Grande do Sul ">Rio Grande do Sul</option>
+        <option value="Rio Grande do Norte ">Rio Grande do Norte</option>
+        <option value="Rondônia ">Rondônia</option>
+        <option value="Roraima ">Roraima</option>
+        <option value="Santa Catarina ">Santa Catarina</option>
+        <option value="São Paulo ">São Paulo</option>
+        <option value="Sergipe ">Sergipe</option>
+        <option value="Tocantins ">Tocantins</option>
+      </select>
+      <br/>
+      <label>CEP:</label>
+      <input type="text" class="enderecoIndividuo" name="cep">
+      <br/>
+      <label>Caixa Postal:</label>
+      <input type="text" class="enderecoIndividuo" name="caixaPostal">
+      <br/>
+      <label>Identificador de país</label>
+      <input type="text" class="enderecoIndividuo" name="idPais">
+      <br/>
+      <label>Tipo de endereço</label>
+      <input type="text" class="enderecoIndividuo" name="tipoEndereco">
+      <br/>
+    </div>
+
+    <input type="radio" name="tabs" class="tabs" id="tab5">
+    <label for="tab5">
+      Comunicação eletrônica do indivíduo
+    </label>
+    <div>
+      <label>Telefone fixo:</label>
+      <input type="text" class="comunicacaoEletronica" name="telFixo">
+      <br/>
+      <label>Telefone celular:</label>
+      <input type="text" class="comunicacaoEletronica" name="telCelular">
+      <br/>
+      <label>Fax:</label>
+      <input type="text" class="comunicacaoEletronica" name="fax">
+      <br/>
+      <label>Pager:</label>
+      <input type="text" class="comunicacaoEletronica" name="pager">
+      <br/>
+      <label>Correio eletrônico:</label>
+      <input type="text" class="comunicacaoEletronica" name="email">
+      <br/>
+      <label>URL:</label>
+      <input type="text" class="comunicacaoEletronica" name="url">
+      <br/>
+      <label>Outro:</label>
+      <input type="text" class="comunicacaoEletronica" name="outro">
+      <br/>
+      <label for="prefContato">Preferência do contato eletrônico:</label>
+      <select name="prefContato">
+        <option selected=" " value=" ">Selecione a Preferência</option>
+        <option value="comercial ">Horário comercial</option>
+        <option value="dia ">Durante o dia</option>
+        <option value="semana ">Finais de semana</option>
+        <option value="qualquer ">Qualquer horário</option>
+        <option value="noturno ">Período noturno</option>
+      </select>
+      <br/>
+      <label>Vinculo do indivíduo:</label>
+      <input type="text" class="comunicacaoEletronica" name="vincIndividuo">
+      <br/>
+      <label>Identificador do vinculo do indivíduo:</label>
+      <input type="text" class="comunicacaoEletronica" name="idVinculo">
+      <br/>
+      <label>Relacionamento do vinculo do indivíduo:</label>
+      <input type="text" class="comunicacaoEletronica" name="relacionamentoVinculo">
+      <br/>
+      <label for="data">Data inicial do vínculo:</label>
+      <input type="date" id="dataInicial" name="dataInicialVinculo" />
+      <br/>
+      <label for="data">Data final do vínculo:</label>
+      <input type="date" id="dataFinal" name="dataFinalVinculo" />
+      <br/>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
